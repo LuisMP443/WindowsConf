@@ -1,0 +1,67 @@
+<head>
+  <title>My HTA Test</title>
+  <HTA:APPLICATION ID="oHTA"
+       APPLICATIONNAME="HTA Test"
+       SCROLL="no"
+       SINGLEINSTANCE="yes"
+       WINDOWSTATE="maximize"
+  >
+</head>
+
+<SCRIPT LANGUAGE="VBScript">
+
+    Sub NoContextMenu()
+      window.event.CancelBubble= True
+      window.event.ReturnValue= False
+      ' Alert("Right-click is not allowed, sorry!")
+    End Sub
+
+
+    Sub Window_onLoad
+        ' use the following line to disable right-click menu and prevent View Source
+        Set document.onContextMenu=GetRef("NoContextMenu")
+
+        ' resize to quarter of screen area, centered
+        window.resizeTo screen.availWidth/2,screen.availHeight/2
+        window.moveTo screen.availWidth/4,screen.availHeight/4
+        'Msgbox oHTA.commandLine
+
+        ' Passed-in code - will execute to set variables
+        arrParams = Split(oHTA.commandLine, "`")
+        For i = 1 to (Ubound(arrParams))
+          ' Msgbox arrParams(i)
+          execute(arrParams(i))
+        Next
+
+        ' SCRIPT-specific code : set controls from executed code
+        txt_bp.value=batch_path
+        txt_num1.value=num1
+        txt_str1.value=str1
+    End Sub
+
+    Sub Set_Env_Vars
+      ' msgbox "writing " & txt_str1.value
+      Set oWSS = CreateObject("WScript.Shell")
+          ' FYI: msgbox oWSS.ExpandEnvironmentStrings("%WinDir%")
+      strBat="Echo @SET ""ZZ_NUM1=" & txt_num1.value _
+          & """ ^& @SET ""ZZ_STR1=" & txt_str1.value & """ > ""%TEMP%""\testhta-set.bat"
+      strBat=strBat & " & Echo @SET ZZ_NUM1=^& @SET ZZ_STR1=^&> ""%TEMP%""\testhta-clr.bat"
+      oWSS.run "cmd /C " & strBat ,0,true
+      Set oWSS = Nothing
+      self.close
+    End Sub
+</SCRIPT>
+
+<BODY bgcolor="#ccccFF">
+  <h1>Hello!</h1>
+  Just a little test....
+  <P>
+  Batch Path &nbsp; <input type="text" value="" name="txt_bp"">
+  <p>
+  Number &nbsp; <input type="text" value="" name="txt_num1"">
+  <p>
+  String &nbsp; <input type="text" value="" name="txt_str1"">
+  <p>
+  <input type="button" value="Return these to the batch"
+   name="run_button"  onClick="Set_Env_Vars">
+</BODY>
