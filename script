@@ -8,14 +8,17 @@ rem # FeatureUpdatesDeferralInDays 0x0000016d (365) DeferFeatureUpdates, DeferQu
 rem # START /WAIT ejecutable
 
 
-  rem # Comando para cambiar el canal de actualizaciones a semi anual
-  Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name BranchReadinessLevel -Value 32
+	
+	rem # Comando para posponer actualizaciones de calidad y características 365 días
+ 	Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name DeferQualityUpdatesPeriodInDays -Value 365
 
-  rem # Comando para posponer actualizaciones de calidad y características 365 días
+	rem # Comando para poner las horas activas de inicio y fin
+	Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name ActiveHoursEnd -Value 21
+	Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name ActiveHoursStart -Value 7
 
-  rem # Elimina las aplicaciones preinstaladas de Windows 10
-  @echo Eliminando aplicaciones preinstaladas ...
-  PowerShell -Command "Get-AppxPackage *3DBuilder* | Remove-AppxPackage"
+	rem # Elimina las aplicaciones preinstaladas de Windows 10
+	@echo Eliminando aplicaciones preinstaladas ...
+	PowerShell -Command "Get-AppxPackage *3DBuilder* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *Cortana* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *Getstarted* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *WindowsAlarms* | Remove-AppxPackage"
