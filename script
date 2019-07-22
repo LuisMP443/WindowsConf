@@ -10,11 +10,11 @@ rem # START /WAIT ejecutable
 
 	
 	rem # Comando para posponer actualizaciones de calidad y características 365 días
- 	Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name DeferQualityUpdatesPeriodInDays -Value 365
+ 	PowerShell Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name DeferQualityUpdatesPeriodInDays -Value 365
 
 	rem # Comando para poner las horas activas de inicio y fin
-	Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name ActiveHoursEnd -Value 21
-	Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name ActiveHoursStart -Value 7
+	PowerShell Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name ActiveHoursEnd -Value 21
+	PowerShell Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name ActiveHoursStart -Value 7
 
 	rem # Elimina las aplicaciones preinstaladas de Windows 10
 	@echo Eliminando aplicaciones preinstaladas ...
@@ -62,10 +62,46 @@ rem # START /WAIT ejecutable
 	REM sc config TrkWks start= disabled
 	sc config WMPNetworkSvc start= disabled
 	sc config WSearch start= disabled
+	
+	rem # Deshabilitar servicios de registro
+	
+set servregistro[0]=BCastDVRUserService*
+set servregistro[1]=CaptureService*
+set servregistro[2]=CDPSvc
+set servregistro[3]=CDPUserSvc*
+set servregistro[4]=ConsentUxUserSvc*
+set servregistro[5]=DeviceFlowUserSvc*
+set servregistro[6]=DevicePickerUserSvc*
+set servregistro[7]=MessagingService*
+set servregistro[8]=OneSyncSvc*
+set servregistro[9]=PimIndexMaintenanceSvc*
+set servregistro[10]=PrintWorkflowUserSvc*
+set servregistro[11]=UnistoreSvc*
+set servregistro[12]=UserDataSvc*
+set servregistro[13]=WpnUserService*
+set servregistro[14]=Xbox*
+set servregistro[15]=AarSvc*
+set servregistro[16]=Xbl*
 
-  rem # Eliminar telemetría y recolección de datos
-  @echo Eliminando telemetría ...
-  reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f
+	PowerShell Set-ItemProperty -Path  HKLM:\SYSTEM\CurrentControlSet\Services\AarSvc* -Name Start -Value 4
+										BCastDVRUserService*
+										CaptureService*
+										CDPSvc
+										CDPUserSvc*
+										ConsentUxUserSvc*
+										DeviceFlowUserSvc*
+										DevicePickerUserSvc*
+										MessagingService*
+										OneSyncSvc*
+										PimIndexMaintenanceSvc*
+										PrintWorkflowUserSvc*
+										UnistoreSvc*
+										UserDataSvc*
+										WpnUserService*
+										Xbgm*
+	rem # Eliminar telemetría y recolección de datos
+	@echo Eliminando telemetría ...
+	reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f
 	reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
 	reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v DontOfferThroughWUAU /t REG_DWORD /d 1 /f
 	reg add "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d 0 /f
@@ -74,6 +110,8 @@ rem # START /WAIT ejecutable
 	reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
 	reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d 0 /f
 	reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger" /v "Start" /t REG_DWORD /d 0 /f
+	
+	
 	@REM Settings -> Privacy -> General -> Let apps use my advertising ID...
 	reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f
 	REM - SmartScreen Filter for Store Apps: Disable
