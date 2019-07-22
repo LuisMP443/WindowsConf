@@ -83,7 +83,39 @@ rem # START /WAIT ejecutable
 	set servregistro[16]=Xbl*
 	set servregistro[17]=WSearch*
 	set servregistro[18]=WMPNetworkSvc
-	
+	set servregistro[19]=WaaSMedicSvc
+	set servregistro[20]=XboxGipSvc
+	set servregistro[21]=FDResPub
+	set servregistro[22]=wuauserv
+	set servregistro[23]=RpcLocator
+	set servregistro[24]=EFS
+	set servregistro[25]=TermService
+	set servregistro[26]=WerSvc
+	set servregistro[27]=MSiSCSI
+	set servregistro[28]=WMPNetworkSvc
+	set servregistro[29]=ALG
+	set servregistro[30]=TabletInputService
+	set servregistro[31]=hidserv
+	set servregistro[32]=bthserv
+	set servregistro[33]=BDESVC
+	set servregistro[34]=WbioSrvc
+	set servregistro[35]=RemoteRegistry
+	set servregistro[36]=UmRdpService
+	set servregistro[37]=WPCSvc
+	set servregistro[38]=Netlogon
+	set servregistro[39]=Fax
+	set servregistro[40]=SessionEnv
+	set servregistro[41]=SNMPTRAP
+	set servregistro[42]=TrkWks
+	set servregistro[43]=SensrSvc
+	set servregistro[44]=PeerDistSvc
+	set servregistro[45]=CscService
+	set servregistro[46]=iphlpsvc
+	set servregistro[47]=WinRM
+
+
+
+
 	set "x=0"
 
 	:SymLoop
