@@ -60,45 +60,41 @@ rem # START /WAIT ejecutable
 	rem sc config dmwappusvc start= disabled ::comprobar
 	REM sc config RemoteRegistry start= disabled
 	REM sc config TrkWks start= disabled
-	sc config WMPNetworkSvc start= disabled
-	sc config WSearch start= disabled
+	
 	
 	rem # Deshabilitar servicios de registro
 	
-set servregistro[0]=BCastDVRUserService*
-set servregistro[1]=CaptureService*
-set servregistro[2]=CDPSvc
-set servregistro[3]=CDPUserSvc*
-set servregistro[4]=ConsentUxUserSvc*
-set servregistro[5]=DeviceFlowUserSvc*
-set servregistro[6]=DevicePickerUserSvc*
-set servregistro[7]=MessagingService*
-set servregistro[8]=OneSyncSvc*
-set servregistro[9]=PimIndexMaintenanceSvc*
-set servregistro[10]=PrintWorkflowUserSvc*
-set servregistro[11]=UnistoreSvc*
-set servregistro[12]=UserDataSvc*
-set servregistro[13]=WpnUserService*
-set servregistro[14]=Xbox*
-set servregistro[15]=AarSvc*
-set servregistro[16]=Xbl*
+	set servregistro[0]=BCastDVRUserService*
+	set servregistro[1]=CaptureService*
+	set servregistro[2]=CDPSvc
+	set servregistro[3]=CDPUserSvc*
+	set servregistro[4]=ConsentUxUserSvc*
+	set servregistro[5]=DeviceFlowUserSvc*
+	set servregistro[6]=DevicePickerUserSvc*
+	set servregistro[7]=MessagingService*
+	set servregistro[8]=OneSyncSvc*
+	set servregistro[9]=PimIndexMaintenanceSvc*
+	set servregistro[10]=PrintWorkflowUserSvc*
+	set servregistro[11]=UnistoreSvc*
+	set servregistro[12]=UserDataSvc*
+	set servregistro[13]=WpnUserService*
+	set servregistro[14]=Xbox*
+	set servregistro[15]=AarSvc*
+	set servregistro[16]=Xbl*
+	set servregistro[17]=WSearch*
+	set servregistro[18]=WMPNetworkSvc
+	
+	set "x=0"
 
-	PowerShell Set-ItemProperty -Path  HKLM:\SYSTEM\CurrentControlSet\Services\AarSvc* -Name Start -Value 4
-										BCastDVRUserService*
-										CaptureService*
-										CDPSvc
-										CDPUserSvc*
-										ConsentUxUserSvc*
-										DeviceFlowUserSvc*
-										DevicePickerUserSvc*
-										MessagingService*
-										OneSyncSvc*
-										PimIndexMaintenanceSvc*
-										PrintWorkflowUserSvc*
-										UnistoreSvc*
-										UserDataSvc*
-										WpnUserService*
-										Xbgm*
+	:SymLoop
+	if not defined servregistro[%x%] goto :endLoop
+	call set VAL=%%servregistro[%x%]%%
+	echo %VAL%
+	PowerShell Set-ItemProperty -Path  HKLM:\SYSTEM\CurrentControlSet\Services\%VAL% -Name Start -Value 4 
+	SET /a "x+=1"
+	GOTO :SymLoop
+	:endLoop
+										
 	rem # Eliminar telemetría y recolección de datos
 	@echo Eliminando telemetría ...
 	reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f
