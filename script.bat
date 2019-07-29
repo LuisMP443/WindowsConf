@@ -206,7 +206,5 @@ rem # START /WAIT ejecutable
 
 	rem # %~dp0\ para poner ruta completa del script y poder ejecutar programas de forma relativa.
 	%~dp0\Programas\OOSU10.exe %~dp0\Programas\ConfigPortatiles2019.cfg /quiet
-	PowerShell	$vol = Mount-DiskImage -ImagePath %~dp0\Programas\  -PassThru |
-	PowerShell	Get-DiskImage | 
-	Powershell	Get-Volume
+	START /WAIT %~dp0\Programas\Office_2016_Plus_X64\setup.exe
 	msiexec /i
