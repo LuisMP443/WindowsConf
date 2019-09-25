@@ -28,21 +28,19 @@ rem # START /WAIT ejecutable
 	PowerShell -Command "Get-AppxPackage *OneNote* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *people* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *WindowsPhone* | Remove-AppxPackage"
-	PowerShell -Command "Get-AppxPackage *photos* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *SkypeApp* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *solit* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *WindowsSoundRecorder* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *xbox* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *zune* | Remove-AppxPackage"
-	PowerShell -Command "Get-AppxPackage *WindowsCalculator* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *WindowsMaps* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *Sway* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *CommsPhone* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *ConnectivityStore* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *Microsoft.Messaging* | Remove-AppxPackage"
 	PowerShell -Command "Get-AppxPackage *ContentDeliveryManager* | Remove-AppxPackage"
-	PowerShell -Command "Get-AppxPackage *Microsoft.WindowsStore* | Remove-AppxPackage"
+
 
 
 	rem # Deshabilitar servicios
@@ -207,4 +205,4 @@ rem # START /WAIT ejecutable
 	rem # %~dp0\ para poner ruta completa del script y poder ejecutar programas de forma relativa.
 	%~dp0\Programas\OOSU10.exe %~dp0\Programas\ConfigPortatiles2019.cfg /quiet
 	START /WAIT %~dp0\Programas\Office_2016_Plus_X64\setup.exe
-	msiexec /i
+	rem # msiexec /i
