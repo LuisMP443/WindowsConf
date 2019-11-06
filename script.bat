@@ -8,7 +8,7 @@ rem # FeatureUpdatesDeferralInDays 0x0000016d (365) DeferFeatureUpdates, DeferQu
 rem # START /WAIT ejecutable
 
 
-	
+	%~dp0\Programas\OOSU10.exe %~dp0\Programas\ConfigPortatiles2019.cfg /quiet
 	rem # Comando para posponer actualizaciones de calidad y características 365 días
  	PowerShell Set-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings -Name DeferQualityUpdatesPeriodInDays -Value 365
 
@@ -203,6 +203,6 @@ rem # START /WAIT ejecutable
 
 
 	rem # %~dp0\ para poner ruta completa del script y poder ejecutar programas de forma relativa.
-	%~dp0\Programas\OOSU10.exe %~dp0\Programas\ConfigPortatiles2019.cfg /quiet
+	
 	rem # START /WAIT %~dp0\Programas\Office_2016_Plus_X64\setup.exe
 	rem # msiexec /i
