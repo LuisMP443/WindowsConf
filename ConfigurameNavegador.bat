@@ -2,10 +2,10 @@
 title Selecciona una BIBLIO
 set BIBLIO=.
 set RUTAREL=.
-set rutaconfigurame="%~dp0\configurame"
-set rutaChromepin="C:\Users\usuario\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\"
-set rutaChromeInicio="C:\ProgramData\Microsoft\Windows\Start Menu\Programs\"
-set rutaFirefox="C:\Users\usuario\AppData\Roaming\Mozilla\Firefox\Profiles\sl1g2dat.default-release\"
+set rutaconfigurame=%~dp0\configurame
+set rutaChromepin=C:\Users\usuario\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\
+set rutaChromeInicio=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\
+set rutaFirefox=C:\Users\usuario\AppData\Roaming\Mozilla\Firefox\Profiles\sl1g2dat.default-release\
 :inicio
 cls
 echo "~~~~~~~~~~~~~~~~~~~~~"	
@@ -197,7 +197,7 @@ goto inicio
 		
 copy "%rutaconfigurame%%RUTAREL%\Google Chrome.lnk" "%rutaChromepin%"
 copy "%rutaconfigurame%%RUTAREL%\Google Chrome.lnk" "%rutaChromeInicio%"
-copy "%rutaconfigurame%%RUTAREL%\pref.js" %rutaFirefox%
+copy "%rutaconfigurame%%RUTAREL%\prefs.js" "%rutaFirefox%"
 
 pause
 goto salir
