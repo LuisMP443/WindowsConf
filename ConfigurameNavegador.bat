@@ -4,6 +4,8 @@ set BIBLIO=.
 set RUTAREL=.
 set rutaconfigurame=%~dp0\configurame
 set rutaChromepin=C:\Users\usuario\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\
+set rutaEdgeInicio=C:\ProgramData\Microsoft\Windows\Start Menu\Programs
+set rutaEdgePin=C:\Users\usuario\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
 set rutaChromeInicio=C:\ProgramData\Microsoft\Windows\Start Menu\Programs\
 set rutaFirefox=C:\Users\usuario\AppData\Roaming\Mozilla\Firefox\Profiles\sl1g2dat.default-release\
 :inicio
@@ -198,6 +200,8 @@ goto inicio
 copy "%rutaconfigurame%%RUTAREL%\Google Chrome.lnk" "%rutaChromepin%"
 copy "%rutaconfigurame%%RUTAREL%\Google Chrome.lnk" "%rutaChromeInicio%"
 copy "%rutaconfigurame%%RUTAREL%\prefs.js" "%rutaFirefox%"
+copy "%rutaconfigurame%%RUTAREL%\Microsoft Edge.lnk" "%rutaEdgeInicio%"
+copy "%rutaconfigurame%%RUTAREL%\Microsoft Edge.lnk" "%rutaEdgePin%"
 
 pause
 goto salir
