@@ -1,0 +1,4 @@
+serverhora="IPSERVER"
+clavewindows="CLAVEWINDOWS"
+serverwindows="IPSERVER":PUERTO
+serveroffice=IPSERVER
