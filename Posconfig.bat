@@ -3,7 +3,7 @@ title POSCONFIGURACION
 echo ~~~~~~~~~~~~~~~~~~~~~
 echo POSTCONFIGURACION
 echo ~~~~~~~~~~~~~~~~~~~~~
-	for /f "delims== tokens=1,2" %%G in (config.txt) do set %%G=%%H
+	for /f "delims== tokens=1,2" %%G in (%~dp0/config.txt) do set %%G=%%H
 
 
 	echo Sincronizando hora
@@ -36,7 +36,7 @@ echo ~~~~~~~~~~~~~~~~~~~~~
 
 	echo Preparando RDPWrap
 	if not exist "%ProgramFiles%\RDP Wrapper" mkdir "%ProgramFiles%\RDP Wrapper"
-	xcopy "%~dp0\RDPWrap\*" "%ProgramFiles%\RDP Wrapper" /s /y
+	xcopy "%~dp0\..\RDPWrap\*" "%ProgramFiles%\RDP Wrapper" /s /y
 	"%ProgramFiles%\RDP Wrapper\helper\autoupdate__enable_autorun_on_startup.bat"
 	PowerShell Add-MpPreference -ExclusionPath '%ProgramFiles%\RDP Wrapper'
 
@@ -49,7 +49,7 @@ echo ~~~~~~~~~~~~~~~~~~~~~
 	cscript %windir%\system32\slmgr.vbs /ato
 
 	start cscript.exe "C:\Program Files\Microsoft Office\Office16\ospp.vbs" /sethst:%serveroffice%
-	startcscript.exe "C:\Program Files\Microsoft Office\Office16\ospp.vbs" /act
+	start cscript.exe "C:\Program Files\Microsoft Office\Office16\ospp.vbs" /act
 
 	
 	start "%~dp0\ConfigurameNavegador.bat"
